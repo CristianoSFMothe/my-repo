@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Loading = styled.div`
-  color: #FFF;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ export const Loading = styled.div`
 
 export const Container = styled.div`
   max-width: 700px;
-  background: #FFF;
+  background: var(--text-color);
   border-radius: 4px;
   box-shadow: var(--box-shadow);
   padding: 30px;
@@ -77,7 +77,7 @@ export const IssuesList = styled.ul`
 
       p {
         margin-top: 15px;
-        font-size: 0.875rem;
+        font-size: var(--font-size-small);
         color: #000;
       }
     }
@@ -91,13 +91,13 @@ export const IssuesList = styled.ul`
         transition: 0.3s;
 
         &:hover {
-          color: #0071db;
+          color: var(--secondary-color);
         }
       }
 
       span {
         background: #222;
-        color: #FFF;
+        color: var(--text-color);
         border-radius: 4px;
         font-size: 0.75rem;
         font-weight: 600;
@@ -117,7 +117,7 @@ export const PageActions = styled.div`
     outline: 0;
     border: 0;
     background: #222;
-    color: #FFF;
+    color: var(--text-color);
     padding: 10px 15px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
@@ -131,6 +131,27 @@ export const PageActions = styled.div`
 
     &:not(:disabled):hover {
       background: #555; 
+    }
+  }
+`;
+
+export const FilterList = styled.div`
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    outline: 0;
+    border: 0;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 3px;
+    font-size: var(--font-size-media);
+
+    &:nth-child(${props => props.active + 1}) {
+      background: var(--secondary-color);
+      color: var(--text-color);
     }
   }
 `;
