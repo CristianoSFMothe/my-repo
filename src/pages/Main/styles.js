@@ -1,10 +1,10 @@
-import styled, { keyframes, css }  from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 export const Container = styled.div`
   max-width: 700px;
-  background: #FFF;
+  background: #fff;
   border-radius: 4px;
-  box-shadow: 0 0 20pc rgba(0,0,0, 0.2);
+  box-shadow: 0 0 20pc rgba(0, 0, 0, 0.2);
   padding: 30px;
   margin: 80px auto;
 
@@ -27,7 +27,7 @@ export const Form = styled.form`
 
   input {
     flex: 1;
-    border: 1px solid #DDD;
+    border: 1px solid #ddd;
     padding: 10px 15px;
     border-radius: 4px;
     font-size: 1.063rem;
@@ -35,7 +35,7 @@ export const Form = styled.form`
 `;
 
 // Criando animação do botão
-const animate = keyframes `
+const animate = keyframes`
   from {
     transform: rotate(0deg);
   }
@@ -43,10 +43,10 @@ const animate = keyframes `
   to {
     transform: rotate(360deg)
   }
-`
+`;
 
-export const SubmitButton = styled.button.attrs(props => ({
-  type: 'submit',
+export const SubmitButton = styled.button.attrs((props) => ({
+  type: "submit",
   disabled: props.loading,
 }))`
   background: var(--primary-color);
@@ -63,10 +63,44 @@ export const SubmitButton = styled.button.attrs(props => ({
     opacity: 0.5;
   }
 
-  ${props => props.loading && 
+  ${(props) =>
+    props.loading &&
     css`
-    svg {
-      animation: ${animate} 2s linear infinite;
-    }`
+      svg {
+        animation: ${animate} 2s linear infinite;
+      }
+    `}
+`;
+
+export const List = styled.ul`
+  list-style-type: none;
+  margin-top: 20px;
+
+  li {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    & + li {
+      border-top: 1px solid #eee;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
   }
+`;
+
+export const DeleteButton = styled.button.attrs({
+  type: "button",
+})`
+  background: transparent;
+  color: var(--primary-color);
+  border: 0;
+  padding: 8px 7px;
+  outline: 0;
+  border-radius: 4px;
 `;
