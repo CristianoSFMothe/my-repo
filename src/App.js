@@ -1,8 +1,13 @@
-function App() {
+import React from "react";
+import Routes from "./routes";
+import GlobalStyle from "./styles/global"
+
+const App = () => {
   return (
-    <div>
-      <h1>My Repo</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <Routes />
+    </>
   );
 }
 
