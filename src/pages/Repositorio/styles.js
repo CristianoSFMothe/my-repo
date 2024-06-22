@@ -36,7 +36,7 @@ export const Owner = styled.header`
 
   p {
     margin-top: 5px;
-    font-size: 0.875rem;
+    font-size: 1.125rem;
     color: var(--description-color);
     text-align: center;
     line-height: 1.4;
@@ -65,8 +65,8 @@ export const IssuesList = styled.ul`
     }
 
     img {
-      width: 36px;
-      height: 36px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       border: 2px solid var(--primary-color);
     }
@@ -77,13 +77,13 @@ export const IssuesList = styled.ul`
 
       p {
         margin-top: 15px;
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         color: #000;
       }
     }
 
     strong {
-      font-size: 0.938rem;
+      font-size: 1.125rem;
 
       a {
         text-decoration: nome;
@@ -104,6 +104,33 @@ export const IssuesList = styled.ul`
         padding: 5px 7px;
         margin-left: 10px;
       }
+    }
+  }
+`;
+
+export const PageActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    outline: 0;
+    border: 0;
+    background: #222;
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 1.5rem;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      background: #222;
+    }
+
+    &:not(:disabled):hover {
+      background: #555; 
     }
   }
 `;
