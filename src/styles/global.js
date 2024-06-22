@@ -6,6 +6,9 @@ export default createGlobalStyle`
     --primary-color: #0D2636;
 
     --font-family: 'Arial, Helvetica, sans-serif'
+    --box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    --description-color: #000;
+    --border: 1px solid #eee
   }
 
   * {
