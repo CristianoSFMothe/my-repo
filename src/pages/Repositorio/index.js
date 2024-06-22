@@ -1,8 +1,10 @@
 import React from "react";
 
-const Repositorio = () => {
+const Repositorio = ({ match }) => {
   return (
-    <h1>Repositorio</h1>
+    <h1 style={{color: '#FFF'}}>
+      {decodeURIComponent(match.params.repositorio)}
+    </h1>
   );
 };
 

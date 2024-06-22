@@ -2,101 +2,100 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import { FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa';
 import {Container, Form, SubmitButton, List, DeleteButton} from './styles';
+import {Link} from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import api from '../services/api';
 
-export default function Main(){
+export default function Main() {
 
   const [newRepo, setNewRepo] = useState('');
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(null)
+  const [alert, setAlert] = useState(null);
 
   // Buscar
   useEffect(() => {
     const repoStorage = localStorage.getItem('repos');
 
-    if(repoStorage) {
+    if (repoStorage) {
       setRepositories(JSON.parse(repoStorage));
     }
-  }, [])
+  }, []);
 
-  //  Salvar alterações
+  // Salvar alterações
   useEffect(() => {
-    localStorage.setItem('repos', JSON.stringify(repositories))
-  }, [repositories])
+    localStorage.setItem('repos', JSON.stringify(repositories));
+  }, [repositories]);
 
-
-  const handleSubmit = useCallback((event)=>{
+  const handleSubmit = useCallback((event) => {
     event.preventDefault();
 
-     const submit = async() => {
+    const submit = async () => {
       setLoading(true);
       setAlert(null);
-      try{
+      try {
 
-        if(newRepo === '') {
+        if (newRepo === '') {
           throw new Error('Você precisa informar o nome do repositório');
         }
 
         const hasRepo = repositories.find(repo => repo.name === newRepo);
 
-        if(hasRepo) {
+        if (hasRepo) {
           throw new Error('Repositório duplicado');
         }
 
         const response = await api.get(`repos/${newRepo}`);
-  
+
         const data = {
           name: response.data.full_name,
-        }
-    
+        };
+
         setRepositories([...repositories, data]);
         setNewRepo('');
-      }catch(error){
-        setAlert(true)
-        console.log(error);
-      }finally{
+      } catch (error) {
+        setAlert(true);
+        toast.error(error.message); 
+      } finally {
         setLoading(false);
       }
-
-    }
+    };
 
     submit();
-
   }, [newRepo, repositories]);
 
   const handleInputChange = (event) => {
     setNewRepo(event.target.value);
     setAlert(null);
-  }
+  };
 
-  const handleDelete = useCallback((repo)=> {
+  const handleDelete = useCallback((repo) => {
     const find = repositories.filter(r => r.name !== repo);
     setRepositories(find);
   }, [repositories]);
 
-
-  return(
+  return (
     <Container>
-      
+      <ToastContainer /> {/* Adicione o ToastContainer ao seu componente */}
       <h1>
-        <FaGithub size={25}/>
+        <FaGithub size={25} />
         Meus Repositórios
       </h1>
 
       <Form onSubmit={handleSubmit} error={alert}>
-        <input 
-        type="text" 
-        placeholder="Adicionar Repositórios"
-        value={newRepo}
-        onChange={handleInputChange}
-        className='searchRepo'
+        <input
+          type="text"
+          placeholder="Adicionar Repositórios"
+          value={newRepo}
+          onChange={handleInputChange}
+          className='searchRepo'
         />
 
         <SubmitButton loading={loading ? 1 : 0} className='addNewRepo'>
           {loading ? (
-            <FaSpinner color="#FFF" size={14}/>
+            <FaSpinner color="#FFF" size={14} />
           ) : (
             <FaPlus color="#FFF" size={14} />
           )}
@@ -105,21 +104,20 @@ export default function Main(){
       </Form>
 
       <List>
-         {repositories.map(repo => (
-           <li key={repo.name}>
-             <span className='listRepo'> 
-             <DeleteButton className='deleteRepo' onClick={()=> handleDelete(repo.name)  }>
-                <FaTrash size={14}/>
-             </DeleteButton>  
-             {repo.name}
-             </span>
-             <a href="" className='optionsRepo'>
-               <FaBars size={20}/>
-             </a>
-           </li>
-         ))} 
+        {repositories.map(repo => (
+          <li key={repo.name}>
+            <span className='listRepo'>
+              <DeleteButton className='deleteRepo' onClick={() => handleDelete(repo.name)}>
+                <FaTrash size={14} />
+              </DeleteButton>
+              {repo.name}
+            </span>
+            <Link to={`/repositorio/${encodeURIComponent(repo.name)}`}className='optionsRepo'>
+              <FaBars size={20} />
+            </Link>
+          </li>
+        ))}
       </List>
-
     </Container>
-  )
+  );
 }
