@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
+  :root {
+    --primary-color: #0D2636;
+
+    --font-family: 'Arial, Helvetica, sans-serif'
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -13,7 +20,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #0D2636;
+    background: var(--primary-color);
     font-size: 0.875rem;
     -webkit-font-smoothing: antialiased !important;
   }
@@ -21,7 +28,7 @@ export default createGlobalStyle`
   body, input, button {
     color: #222;
     font-size: 0.875rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-family);
   }
 
   button {
